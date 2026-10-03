@@ -1,4 +1,4 @@
--- // Mahoraga V107 - Full UI Hub & Whitelist Verified //
+-- // Mahoraga V107 - Luxury Gold Interactive Hub //
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
@@ -18,7 +18,7 @@ if LocalPlayer.Name ~= "Ryon_230808" then
     return
 end
 
-print("Whitelist Verified: Ryon_230808. Loading Mahoraga V107 Hub...")
+print("Whitelist Verified: Ryon_230808. Loading Luxury Gold Mahoraga Hub...")
 
 -- Clean up old GUI if exists
 if LocalPlayer.PlayerGui:FindFirstChild("MahoragaHub") then
@@ -31,66 +31,99 @@ ScreenGui.Name = "MahoragaHub"
 ScreenGui.ResetOnSpawn = false
 ScreenGui.Parent = LocalPlayer.PlayerGui
 
+-- Main Frame (Luxury Dark & Gold Theme)
 local MainFrame = Instance.new("Frame", ScreenGui)
-MainFrame.Size = UDim2.new(0, 240, 0, 320)
+MainFrame.Size = UDim2.new(0, 250, 0, 340)
 MainFrame.Position = UDim2.new(0.05, 0, 0.35, 0)
-MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+MainFrame.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
 MainFrame.BorderSizePixel = 2
-MainFrame.BorderColor3 = Color3.fromRGB(220, 160, 40)
+MainFrame.BorderColor3 = Color3.fromRGB(255, 215, 0) -- Gold Border
 MainFrame.Active = true
 MainFrame.Draggable = true
 
--- Title Label
+-- Title Label with Gold Gradient / Accent
 local Title = Instance.new("TextLabel", MainFrame)
-Title.Size = UDim2.new(1, 0, 0, 35)
-Title.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Title.Size = UDim2.new(1, 0, 0, 40)
+Title.BackgroundColor3 = Color3.fromRGB(30, 25, 10)
 Title.TextColor3 = Color3.fromRGB(255, 215, 0)
 Title.TextSize = 16
 Title.Font = Enum.Font.SourceSansBold
-Title.Text = "MAHORAGA V107 HUB"
+Title.Text = "⚡ MAHORAGA V107 HUB ⚡"
 
--- Wheel Container (Transparent & Clean)
+-- Wheel Container (Dharma Wheel Styling)
 local Wheel = Instance.new("ImageLabel", MainFrame)
 Wheel.Size = UDim2.new(0, 90, 0, 90)
-Wheel.Position = UDim2.new(0.5, -45, 0, 45)
+Wheel.Position = UDim2.new(0.5, -45, 0, 50)
 Wheel.BackgroundTransparency = 1
 Wheel.Image = "rbxassetid://6023426915"
 
--- Action Button 1: Toggle Heal
+-- Action Button 1: Toggle Heal (Gold/Green Interactive)
 local HealBtn = Instance.new("TextButton", MainFrame)
-HealBtn.Size = UDim2.new(0, 200, 0, 35)
-HealBtn.Position = UDim2.new(0.5, -100, 0, 145)
-HealBtn.BackgroundColor3 = Color3.fromRGB(40, 140, 40)
+HealBtn.Size = UDim2.new(0, 210, 0, 38)
+HealBtn.Position = UDim2.new(0.5, -105, 0, 155)
+HealBtn.BackgroundColor3 = Color3.fromRGB(34, 139, 34)
 HealBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 HealBtn.TextSize = 14
 HealBtn.Font = Enum.Font.SourceSansBold
 HealBtn.Text = "Status: Auto-Heal Active"
+HealBtn.BorderSizePixel = 1
+HealBtn.BorderColor3 = Color3.fromRGB(255, 215, 0)
 
--- Action Button 2: Teleport / Mode Switch
+-- Action Button 2: Wheel Spin Toggle (Gold/Blue Interactive)
 local ModeBtn = Instance.new("TextButton", MainFrame)
-ModeBtn.Size = UDim2.new(0, 200, 0, 35)
-ModeBtn.Position = UDim2.new(0.5, -100, 0, 190)
-ModeBtn.BackgroundColor3 = Color3.fromRGB(180, 50, 50)
+ModeBtn.Size = UDim2.new(0, 210, 0, 38)
+ModeBtn.Position = UDim2.new(0.5, -105, 0, 205)
+ModeBtn.BackgroundColor3 = Color3.fromRGB(30, 90, 160)
 ModeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 ModeBtn.TextSize = 14
 ModeBtn.Font = Enum.Font.SourceSansBold
-ModeBtn.Text = "Adaptation Mode: Normal"
+ModeBtn.Text = "Mode: Wheel Spin On"
+ModeBtn.BorderSizePixel = 1
+ModeBtn.BorderColor3 = Color3.fromRGB(255, 215, 0)
 
--- Status Label
+-- Status Footer Label
 local StatusLabel = Instance.new("TextLabel", MainFrame)
 StatusLabel.Size = UDim2.new(1, 0, 0, 30)
 StatusLabel.Position = UDim2.new(0, 0, 1, -35)
 StatusLabel.BackgroundTransparency = 1
-StatusLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+StatusLabel.TextColor3 = Color3.fromRGB(218, 165, 32) -- Goldenrod text
 StatusLabel.TextSize = 12
-StatusLabel.Font = Enum.Font.SourceSans
-StatusLabel.Text = "User: Ryon_230808 (Verified)"
+StatusLabel.Font = Enum.Font.SourceSansItalic
+StatusLabel.Text = "Owner: Ryon_230808 (Verified)"
 
--- Continuous 3-Second Healing System (40% Heal Logic)
+-- Variables for Button Toggles
+local autoHealEnabled = true
+local wheelSpinEnabled = true
+
+-- Button 1 Functionality (Toggle Auto-Heal)
+HealBtn.MouseButton1Click:Connect(function()
+    autoHealEnabled = not autoHealEnabled
+    if autoHealEnabled then
+        HealBtn.BackgroundColor3 = Color3.fromRGB(34, 139, 34)
+        HealBtn.Text = "Status: Auto-Heal Active"
+    else
+        HealBtn.BackgroundColor3 = Color3.fromRGB(165, 42, 42)
+        HealBtn.Text = "Status: Auto-Heal Off"
+    end
+end)
+
+-- Button 2 Functionality (Toggle Wheel Spin Animation)
+ModeBtn.MouseButton1Click:Connect(function()
+    wheelSpinEnabled = not wheelSpinEnabled
+    if wheelSpinEnabled then
+        ModeBtn.BackgroundColor3 = Color3.fromRGB(30, 90, 160)
+        ModeBtn.Text = "Mode: Wheel Spin On"
+    else
+        ModeBtn.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+        ModeBtn.Text = "Mode: Wheel Spin Paused"
+    end
+end)
+
+-- Continuous 3-Second Healing System (Controlled by Toggle)
 task.spawn(function()
     while true do
         task.wait(3)
-        if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
+        if autoHealEnabled and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
             local hum = LocalPlayer.Character.Humanoid
             if hum.Health > 0 and hum.Health < hum.MaxHealth then
                 local healAmount = hum.MaxHealth * 0.4
@@ -100,14 +133,16 @@ task.spawn(function()
     end
 end)
 
--- Rotation Adaptation Loop
+-- Rotation Adaptation Loop (Controlled by Toggle)
 task.spawn(function()
     local rot = 0
     while true do
-        rot = (rot + 3) % 360
-        Wheel.Rotation = rot
         task.wait(0.03)
+        if wheelSpinEnabled then
+            rot = (rot + 4) % 360
+            Wheel.Rotation = rot
+        end
     end
 end)
 
-print("Mahoraga V107 Hub Loaded Successfully with Full UI!")
+print("Mahoraga V107 Luxury Gold Hub Loaded Successfully!")
